@@ -11,7 +11,7 @@ class UserRouter {
         this.controllersConfig();
     }
 
-    controllersConfig() {
+    controllersConfig(): void {
         /* CONTROLLER */
         this.userController = new UserController()
         this.router.get('/', this.userController.getUsers);

@@ -1,4 +1,3 @@
-import User from "../schema/user";
 import { Request, Response } from 'express';
 import UserService from "../service/user";
 
@@ -34,7 +33,7 @@ class UserController {
             return res.status(500).json({ Error: response });
         }
         res.status(200).json({ data: response })
-    };
+    }
 
     public async updateUser(req: Request, res: Response): Promise<void> {
         const id = req.params.id;
@@ -44,7 +43,7 @@ class UserController {
             return res.status(500).json({ Error: response });
         }
         res.status(200).json({ data: response })
-    };
+    }
 
 }
 

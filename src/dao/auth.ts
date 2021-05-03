@@ -5,9 +5,14 @@ import {
     comparePassword
 } from '../helpers/jwt';
 
-class AuthDao {
+// interface IResponse {
+//     ok: boolean,
+//     response: unknown,
+//     user?: unknown,
+//     token?: string,
+// }
 
-    constructor() { }
+class AuthDao {
 
     async registerUser(body: any) {
         const { name, email, password } = body;
@@ -65,7 +70,7 @@ class AuthDao {
         }
     }
 
-    async revalidateToken(body: any) {
+    async revalidateToken(): Promise<void> {
         // const id = req.id;
         // const name = req.name;
         // const token = await generateJWT(id, name);
@@ -75,7 +80,6 @@ class AuthDao {
         //     name,
         //     token,
         // });
-        return {}
     }
 
 }

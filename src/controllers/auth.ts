@@ -16,7 +16,7 @@ class Auth {
             return res.status(500).json({ Error: response });
         }
         res.status(200).json({ data: response });
-    };
+    }
 
     public async loginUser(req: Request, res: Response): Promise<void> {
         const body = req.body;
@@ -25,9 +25,9 @@ class Auth {
             return res.status(500).json({ Error: response });
         }
         res.status(200).json({ data: response });
-    };
+    }
 
-    public async revalidateToken(req: Request, res: Response): Promise<void> {
+    public async revalidateToken(): Promise<void> {
         // const id = req.id;
         // const name = req.name;
         // const token = await generateJWT(id, name);
@@ -37,7 +37,7 @@ class Auth {
         //     name,
         //     token,
         // });
-    };
+    }
 }
 
 export default Auth;

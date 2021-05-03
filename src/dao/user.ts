@@ -2,8 +2,6 @@ import User from "../schema/user";
 
 class UserDao {
 
-    constructor() { }
-
     async getUsers() {
         try {
             const users = await User.find();
@@ -19,7 +17,7 @@ class UserDao {
         }
     }
 
-    async getUserById(id: any) {
+    async getUserById(id: string) {
         try {
             const user = await User.findById(id);
             if (!user) {
@@ -40,7 +38,7 @@ class UserDao {
         }
     }
 
-    async deleteUser(id: any) {
+    async deleteUser(id: string) {
         try {
             const deletedUser = await User.findByIdAndDelete(id);
             if (!deletedUser) {
@@ -61,7 +59,7 @@ class UserDao {
         }
     }
 
-    async updateUser(id: any, body: any) {
+    async updateUser(id: string, body: any) {
         try {
             const updatedUser = await User.findByIdAndUpdate(id, body, {
                 new: true,

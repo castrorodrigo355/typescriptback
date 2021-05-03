@@ -12,15 +12,15 @@ class UserService {
         return this.userDao.getUsers()
     }
 
-    getUserById(id: any) {
+    getUserById(id: string) {
         return this.userDao.getUserById(id)
     }
 
-    deleteUser(id: any) {
+    deleteUser(id: string) {
         return this.userDao.deleteUser(id)
     }
 
-    updateUser(id: any, body: any) {
+    updateUser(id: string, body: any) {
         return this.userDao.updateUser(id, body)
     }
 

@@ -19,7 +19,7 @@ class Server {
         this.routersConfig();
     }
 
-    settingsConfig() {
+    settingsConfig(): void {
         /* SETTINGS */
         this.app.set("port", configApp.port);
         /* MIDDLEWARES */
@@ -29,13 +29,13 @@ class Server {
         this.app.use(express.urlencoded({ extended: false }));
     }
 
-    routersConfig() {
+    routersConfig(): void {
         /* ROUTES */
         this.app.use("/auth", this.routerAuthInstance.router);
         this.app.use("/users", this.routerUserInstance.router);
     }
 
-    execute() {
+    execute(): void {
         this.app.listen(this.app.get("port"), () => {
             console.log(`Server listen ${this.app.get("port")}`);
         })
