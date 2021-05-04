@@ -1,29 +1,27 @@
 import UserDao from '../dao/user';
 
-class UserService {
+export default class UserService {
 
-    public userDao: UserDao
+    public userDao: UserDao;
 
     constructor() {
         this.userDao = new UserDao()
     }
 
-    getUsers() {
+    public getUsers() {
         return this.userDao.getUsers()
     }
 
-    getUserById(id: string) {
+    public getUserById(id: string) {
         return this.userDao.getUserById(id)
     }
 
-    deleteUser(id: string) {
+    public deleteUser(id: string) {
         return this.userDao.deleteUser(id)
     }
 
-    updateUser(id: string, body: any) {
+    public updateUser(id: string, body: any) {
         return this.userDao.updateUser(id, body)
     }
 
 }
-
-export default UserService;

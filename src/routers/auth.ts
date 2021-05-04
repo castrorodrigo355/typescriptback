@@ -12,11 +12,11 @@ class AuthRouter {
         this.authConfig();
     }
 
-    authConfig() {
+    public async authConfig() {
         /* CONTROLLER */
         this.router.post('/register', this.authController.registerUser);
         this.router.post('/login', this.authController.loginUser);
-        this.router.get("/renew", this.authController.revalidateToken);
+        // this.router.get("/renew", this.authController.revalidateToken);
     }
 
 }

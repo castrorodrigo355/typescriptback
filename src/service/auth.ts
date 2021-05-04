@@ -1,5 +1,11 @@
 import AuthDao from '../dao/auth';
 
+interface IResponse {
+    ok: boolean;
+    status: number;
+    response: string;
+}
+
 class AuthService {
 
     public authDao: AuthDao
@@ -8,11 +14,11 @@ class AuthService {
         this.authDao = new AuthDao()
     }
 
-    registerUser(body: any) {
+    public registerUser(body: any): Promise<IResponse> {
         return this.authDao.registerUser(body)
     }
 
-    loginUser(body: any) {
+    public loginUser(body: any): Promise<IResponse> {
         return this.authDao.loginUser(body)
     }
 

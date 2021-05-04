@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
-export const generateJWT = (id: string, name: string) => {
+export const generateJWT = (id: string, name: string): Promise<string> => {
     return new Promise((resolve, reject) => {
         const payload = { id, name };
         const seed = "Eltraidor1";
@@ -17,12 +17,12 @@ export const generateJWT = (id: string, name: string) => {
     });
 };
 
-export const generateHashPassword = (password: string) => {
+export const generateHashPassword = (password: string): string => {
     const salt = bcrypt.genSaltSync();
     const hashPassword = bcrypt.hashSync(password, salt);
     return hashPassword;
 };
 
-export const comparePassword = (pass: string, password: string) => {
-    return bcrypt.compareSync(password, pass);
+export const comparePassword = (userPassword: string, inputPassword: string): boolean => {
+    return bcrypt.compareSync(inputPassword, userPassword);
 };

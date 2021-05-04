@@ -1,50 +1,48 @@
 import { Request, Response } from 'express';
 import UserService from "../service/user";
 
-class UserController {
+export default class UserController {
 
     public userService: UserService;
 
     constructor() {
-        this.userService = new UserService()
+        this.userService = new UserService();
     }
 
-    public async getUsers(req: Request, res: Response): Promise<void> {
-        const { ok, response } = await this.userService.getUsers()
+    public getUsers = async (req: Request, res: Response): Promise<void> => {
+        const { ok, users, status } = await this.userService.getUsers()
         if (!ok) {
-            return res.status(500).json({ Error: response });
+            return res.status(status).json({ Error: null });
         }
-        res.status(200).json({ data: response })
+        res.status(status).json({ data: users })
     }
 
-    public async getUserById(req: Request, res: Response): Promise<void> {
+    public getUserById = async (req: Request, res: Response): Promise<void> => {
         const id = req.params.id;
-        const { ok, response } = await this.userService.getUserById(id)
+        const { ok, user, status } = await this.userService.getUserById(id)
         if (!ok) {
-            return res.status(500).json({ Error: response });
+            return res.status(status).json({ Error: user });
         }
-        res.status(200).json({ data: response })
+        res.status(status).json({ data: user })
     }
 
-    public async deleteUser(req: Request, res: Response): Promise<void> {
+    public deleteUser = async (req: Request, res: Response): Promise<void> => {
         const id = req.params.id;
-        const { ok, response } = await this.userService.deleteUser(id)
+        const { ok, user, status } = await this.userService.deleteUser(id)
         if (!ok) {
-            return res.status(500).json({ Error: response });
+            return res.status(status).json({ Error: user });
         }
-        res.status(200).json({ data: response })
+        res.status(status).json({ data: user })
     }
 
-    public async updateUser(req: Request, res: Response): Promise<void> {
+    public updateUser = async (req: Request, res: Response): Promise<void> => {
         const id = req.params.id;
         const body = req.body;
-        const { ok, response } = await this.userService.updateUser(id, body)
+        const { ok, user, status } = await this.userService.updateUser(id, body)
         if (!ok) {
-            return res.status(500).json({ Error: response });
+            return res.status(status).json({ Error: user });
         }
-        res.status(200).json({ data: response })
+        res.status(status).json({ data: user })
     }
 
 }
-
-export default UserController;

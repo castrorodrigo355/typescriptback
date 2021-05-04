@@ -1,65 +1,76 @@
 import User from "../schema/user";
+import { IUsersResponse, IUserResponse } from '../interface/user';
 
-class UserDao {
 
-    async getUsers() {
+
+export default class UserDao {
+
+    public async getUsers(): Promise<IUsersResponse> {
         try {
             const users = await User.find();
             return {
                 ok: true,
-                response: users,
-            }
+                users: users,
+                status: 200
+            };
         } catch (error) {
             return {
                 ok: false,
-                response: error,
-            }
+                users: null,
+                status: 500
+            };
         }
     }
 
-    async getUserById(id: string) {
+    public async getUserById(id: string): Promise<IUserResponse> {
         try {
             const user = await User.findById(id);
             if (!user) {
                 return {
                     ok: false,
-                    response: null
+                    user: null,
+                    status: 401
                 }
             }
             return {
                 ok: true,
-                response: user
+                user: user,
+                status: 200
             }
         } catch (error) {
             return {
                 ok: false,
-                response: error,
+                user: null,
+                status: 500
             }
         }
     }
 
-    async deleteUser(id: string) {
+    public deleteUser = async (id: string): Promise<IUserResponse> => {
         try {
             const deletedUser = await User.findByIdAndDelete(id);
             if (!deletedUser) {
                 return {
                     ok: false,
-                    response: null
+                    user: null,
+                    status: 401
                 }
             }
             return {
                 ok: true,
-                response: deletedUser
+                user: deletedUser,
+                status: 200
             }
         } catch (error) {
             return {
                 ok: false,
-                response: error,
+                user: null,
+                status: 500
             }
         }
     }
 
-    async updateUser(id: string, body: any) {
+    public async updateUser(id: string, body: any): Promise<IUserResponse> {
         try {
             const updatedUser = await User.findByIdAndUpdate(id, body, {
                 new: true,
@@ -67,21 +78,22 @@ class UserDao {
             if (!updatedUser) {
                 return {
                     ok: false,
-                    response: null
+                    user: null,
+                    status: 401
                 }
             }
             return {
                 ok: true,
-                response: updatedUser
+                user: updatedUser,
+                status: 200
             }
         } catch (error) {
             return {
                 ok: false,
-                response: error,
+                user: null,
+                status: 500
             }
         }
     }
 
 }
-
-export default UserDao;

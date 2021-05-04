@@ -5,16 +5,14 @@ import UserRouter from './routers/user';
 import AuthRouter from './routers/auth';
 import { configApp } from './config/config';
 
-class Server {
+export default class Server {
 
-    private app: express.Application;
-    private routerAuthInstance: AuthRouter;
-    private routerUserInstance: UserRouter;
+    public app: express.Application;
+    public routerAuthInstance = new AuthRouter();
+    public routerUserInstance = new UserRouter();
 
     constructor() {
         this.app = express();
-        this.routerAuthInstance = new AuthRouter();
-        this.routerUserInstance = new UserRouter();
         this.settingsConfig();
         this.routersConfig();
     }
@@ -41,5 +39,3 @@ class Server {
         })
     }
 }
-
-export default Server;

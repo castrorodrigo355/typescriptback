@@ -9,22 +9,22 @@ class Auth {
         this.authService = new AuthService();
     }
 
-    public async registerUser(req: Request, res: Response): Promise<void> {
+    public registerUser = async (req: Request, res: Response): Promise<void> => {
         const body = req.body;
-        const { ok, response } = await this.authService.registerUser(body);
+        const { ok, status, response } = await this.authService.registerUser(body);
         if (!ok) {
-            return res.status(500).json({ Error: response });
+            return res.status(status).json({ Error: response });
         }
-        res.status(200).json({ data: response });
+        res.status(status).json({ data: response });
     }
 
-    public async loginUser(req: Request, res: Response): Promise<void> {
+    public loginUser = async (req: Request, res: Response): Promise<void> => {
         const body = req.body;
-        const { ok, response } = await this.authService.loginUser(body);
+        const { ok, status, response } = await this.authService.loginUser(body);
         if (!ok) {
-            return res.status(500).json({ Error: response });
+            return res.status(status).json({ Error: response });
         }
-        res.status(200).json({ data: response });
+        res.status(status).json({ data: response });
     }
 
     public async revalidateToken(): Promise<void> {

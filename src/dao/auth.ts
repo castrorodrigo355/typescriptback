@@ -1,26 +1,21 @@
 import User from "../schema/user";
+import { IAuthResponse } from "../interface/auth";
 import {
     generateJWT,
     generateHashPassword,
     comparePassword
 } from '../helpers/jwt';
 
-// interface IResponse {
-//     ok: boolean,
-//     response: unknown,
-//     user?: unknown,
-//     token?: string,
-// }
-
 class AuthDao {
 
-    async registerUser(body: any) {
+    async registerUser(body: any): Promise<IAuthResponse> {
         const { name, email, password } = body;
         try {
             const userSearch = await User.findOne({ email });
             if (userSearch) {
                 return {
                     ok: false,
+                    status: 402,
                     response: "This email is already used."
                 }
             }
@@ -32,26 +27,28 @@ class AuthDao {
 
             return {
                 ok: true,
-                user,
-                token,
+                status: 201,
+                response: token
             }
 
         } catch (error) {
             return {
                 ok: false,
+                status: 500,
                 response: "Error. Try later please."
             }
         }
     }
 
-    async loginUser(body: any) {
+    async loginUser(body: any): Promise<IAuthResponse> {
         const { email, password } = body;
         try {
             const user = await User.findOne({ email });
-            const validatePass = comparePassword(password, user.password)
+            const validatePass = comparePassword(user.password, password)
             if (!validatePass) {
                 return {
                     ok: false,
+                    status: 405,
                     response: "Incorrect Password."
                 }
             }
@@ -59,12 +56,14 @@ class AuthDao {
             const token = await generateJWT(user._id, user.name);
             return {
                 ok: true,
+                status: 201,
                 response: token
             }
 
         } catch (error) {
             return {
                 ok: false,
+                status: 500,
                 response: "Error. Try later please."
             }
         }
