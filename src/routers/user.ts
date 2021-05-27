@@ -12,7 +12,6 @@ export default class UserRouter {
     }
 
     public controllersConfig() {
-        /* CONTROLLER */
         this.router.get('/', this.userController.getUsers);
         this.router.get('/:id', this.userController.getUserById);
         this.router.delete("/:id", this.userController.deleteUser);

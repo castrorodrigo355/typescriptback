@@ -2,11 +2,11 @@ import User from "../schema/user";
 import { IAuthResponse } from "../interface/auth";
 import {
     generateJWT,
+    comparePassword,
     generateHashPassword,
-    comparePassword
 } from '../helpers/jwt';
 
-class AuthDao {
+export default class AuthDao {
 
     async registerUser(body: any): Promise<IAuthResponse> {
         const { name, email, password } = body;
@@ -82,5 +82,3 @@ class AuthDao {
     }
 
 }
-
-export default AuthDao;

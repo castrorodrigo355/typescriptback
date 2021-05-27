@@ -6,7 +6,7 @@ interface IResponse {
     response: string;
 }
 
-class AuthService {
+export default class AuthService {
 
     public authDao: AuthDao
 
@@ -23,5 +23,3 @@ class AuthService {
     }
 
 }
-
-export default AuthService;

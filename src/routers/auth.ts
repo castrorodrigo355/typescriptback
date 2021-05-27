@@ -1,7 +1,8 @@
-import { Router } from 'express';
 import AuthController from '../controllers/auth';
+import { Router } from 'express';
+import { configRoutes } from '../config/config';
 
-class AuthRouter {
+export default class AuthRouter {
 
     public router: Router;
     public authController: AuthController;
@@ -13,12 +14,9 @@ class AuthRouter {
     }
 
     public async authConfig() {
-        /* CONTROLLER */
-        this.router.post('/register', this.authController.registerUser);
-        this.router.post('/login', this.authController.loginUser);
+        this.router.post(configRoutes.SIGNUP_PATH, this.authController.registerUser);
+        this.router.post(configRoutes.SIGNIN_PATH, this.authController.loginUser);
         // this.router.get("/renew", this.authController.revalidateToken);
     }
 
 }
-
-export default AuthRouter;

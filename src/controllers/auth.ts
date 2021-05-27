@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import AuthService from '../service/auth';
 
-class Auth {
+export default class Auth {
 
     public authService: AuthService;
 
@@ -39,5 +39,3 @@ class Auth {
         // });
     }
 }
-
-export default Auth;

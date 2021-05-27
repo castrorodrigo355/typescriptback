@@ -1,11 +1,9 @@
 import User from "../schema/user";
 import { IUsersResponse, IUserResponse } from '../interface/user';
 
-
-
 export default class UserDao {
 
-    public async getUsers(): Promise<IUsersResponse> {
+    public getUsers = async (): Promise<IUsersResponse> => {
         try {
             const users = await User.find();
             return {
@@ -22,7 +20,7 @@ export default class UserDao {
         }
     }
 
-    public async getUserById(id: string): Promise<IUserResponse> {
+    public getUserById = async (id: string): Promise<IUserResponse> => {
         try {
             const user = await User.findById(id);
             if (!user) {
@@ -70,7 +68,7 @@ export default class UserDao {
         }
     }
 
-    public async updateUser(id: string, body: any): Promise<IUserResponse> {
+    public updateUser = async (id: string, body: any): Promise<IUserResponse> => {
         try {
             const updatedUser = await User.findByIdAndUpdate(id, body, {
                 new: true,
